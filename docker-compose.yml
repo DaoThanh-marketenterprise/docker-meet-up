@@ -4,7 +4,7 @@ services:
   server: 
     image: nginx:1.18
     container_name: laravel-nginx
-    hostname: nginx
+    hostname: nginx-server
     restart: always
     ports: 
       - "8080:80"
@@ -19,14 +19,14 @@ services:
       context: ./.docker/php
       dockerfile: Dockerfile 
     container_name: laravel_php
-    hostname: php
+    hostname: php-app
     working_dir: /home/www/
     entrypoint: ./entrypoint.sh
     volumes: 
       - ./source/:/home/www/
     environment:
       DB_CONNECTION: mysql
-      DB_HOST: mysql
+      DB_HOST: database
       DB_PORT: 3306
       DB_DATABASE: laravel
       DB_USERNAME: root
@@ -36,10 +36,10 @@ services:
     networks: 
       - laravel
 
-  db:
+  database:
     image: mysql:8.0.30
     container_name: laravel-mysql
-    hostname: mysql
+    hostname: mysql-database
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_DATABASE: laravel

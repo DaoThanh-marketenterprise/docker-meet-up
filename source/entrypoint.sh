@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# composer install
+composer install
 
-echo "lalalalalalallalalalalalal Waiting MYSQL server"
+echo "Waiting MYSQL server"
 
-wait-for laravel-mysql:3306 -- echo "ahjhjhjhjhjhjhjhjhjhjhjhjhj MYSQL server already"
+wait-for  mysql-database:3306 -- echo "MYSQL server already"
 
 php artisan migrate
 
