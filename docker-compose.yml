@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   server: 
-    image: nginx:1.18
+    image: nginx:1.18-alpine
     container_name: laravel-nginx
     hostname: nginx-server
     restart: always
